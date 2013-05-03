@@ -1,0 +1,45 @@
+#!/bin/bash
+#
+# Makes a Lucene release and uploads it to SourceForge.
+
+set -o history
+trap 'history 1; if [[ $? != 0 ]]; then exit; fi' DEBUG
+
+if [[ "${1}" == "-create" ]]; then
+  create=1;
+  shift;
+fi
+
+if [[ $# != 1 ]]; then
+  echo "Usage:  $0 [-create] VERSION";
+  exit 1;
+fi
+
+version=$1
+file=lucene-$version.tar
+dir=lucene-$version
+
+if [[ $create == 1 ]]; then
+ # tag the latest versions with the version name
+ cvs -d :ext:$USER@cvs.lucene.sourceforge.net:/cvsroot/lucene \
+     rtag $version lucene;
+fi
+
+trap "rm -rf $dir $file.gz src.tar.gz" EXIT
+
+# export the tagged code from CVS
+cvs -r -d :pserver:anonymous@cvs.lucene.sourceforge.net:/cvsroot/lucene \
+    export -r $version -d $dir lucene
+
+# build src.tar.gz first
+tar cf src.tar $dir
+gzip -f src.tar
+
+# build release
+make -C $dir release
+mv $dir/lucene.tar $file
+tar uvf $file src.tar.gz
+gzip $file
+
+# upload archives to Sourceforge
+ncftpput upload.sourceforge.net /incoming $file.gz

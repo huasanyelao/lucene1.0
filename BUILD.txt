@@ -1,0 +1,26 @@
+Lucene Source Release
+
+To build Lucene from source, you must first install the following:
+
+  1. Jakarta Ant
+
+     Please go to <http://jakarta.apache.org/ant/> and follow the
+     instructions for installing the binary version of Ant. You will
+     also need to get the jakarta-ant-optional.jar from the distribution
+     directory on the website because JavaCC is an optional task.
+
+  2. JDK
+
+     Set the JDK_HOME environment variable to the location of your JDK
+     installation.  JDK releases can be downloaded from Sun or IBM
+     (http://java.sun.com/j2se/ or http://www.ibm.com/java/).
+
+Once you have installed the requirements above, you can build Lucene
+by simply typing: 'ant' in the lucene source distribution directory.
+
+For example:
+
+    cd lucene; ant
+
+This will generate a lucene.jar file located in the lucene/ant.build
+directory.

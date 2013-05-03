@@ -1,0 +1,14 @@
+Adding to lucene, and becoming a lucene developer
+
+The policy is that first-time contributions should be made by posting them
+to lucene-dev.  Existing developers can then review them, and if they look
+reasonable, commit them.  Only when a developer gains a track record of
+useful, high-quality contributions should they be able to make contributions
+directly.
+
+So please don't just ask to be made a developer.  First post changes or
+additions to lucene-dev.  Then, if you get positive feedback, send mail to
+the list asking to be added as a developer.  Also, don't mail me or other
+developers directly.  Use this list.  We shouldn't add developers without
+other developers being aware of this.
+
